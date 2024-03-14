@@ -3,7 +3,8 @@
 //
 #include "Enemy.h"
 #include <iostream>
-
+#define RESET   "\033[0m"
+#define GREEN   "\033[32m"
 
 using namespace std;
 
@@ -26,10 +27,10 @@ void Enemy::doAttack(Character *target) {
 void Enemy::takeDamage(int damage) {
     setHealth(getHealth() - damage);
     if(getHealth() <= 0) {
-        cout<<getName()<<"---The enemy died---"<<endl;
+        cout<<getName()<<GREEN<<"---The enemy died---"<<RESET<<endl;
     }
     else {
-        cout<<getName()<<" ---Has taken " << damage << " damage---" << endl;
+        cout<<getName()<<GREEN<<"---The enemy has taken " << damage << " damage---" <<RESET<< endl;
     }
 }
 

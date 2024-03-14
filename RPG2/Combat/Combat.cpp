@@ -4,6 +4,10 @@
 #include "Combat.h"
 #include <iostream>
 #include <algorithm>
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+#define MAGENTA "\033[35m"
+#define GREEN   "\033[32m"
 
 using namespace std;
 
@@ -57,10 +61,10 @@ void Combat::doCombat() {
 
     //No se imprime el nombre del ganador
     if(enemies.size() == 0) {
-        cout<<"---You won the battle---"<<endl;
+        cout<< MAGENTA <<"\t---You won the battle---"<< RESET <<endl;
     }
     else {
-        cout<<"---You died---Game over..."<<endl;
+        cout<< RED <<"\t---You died---Game over..."<< RESET <<endl;
     }
 }
 
@@ -117,11 +121,11 @@ void Combat::checkForFlee(Character *character) {
     if (character->getHealth() != 0 && character->getHealth() > 0){
         if (fleed) {
             if(character->getIsPlayer()) {
-            cout << "---You have fled like a sewer rat---" << endl;
+            cout << RED << "\t---You have fled like a sewer rat---"<< RESET << endl;
             teamMembers.erase(remove(teamMembers.begin(), teamMembers.end(), character), teamMembers.end());
             }
             else {
-            cout << character->getName() << "---He has fled with his tail between his legs---" << endl;
+            cout << character->getName() << GREEN << "\t---He has fled with his tail between his legs---" << RESET << endl;
             enemies.erase(remove(enemies.begin(), enemies.end(), character), enemies.end());
             }
             participants.erase(remove(participants.begin(), participants.end(), character), participants.end());

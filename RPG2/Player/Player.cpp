@@ -5,6 +5,12 @@
 #include <iostream>
 #include "../Utils.h"
 #include <algorithm>
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+#define YELLOW  "\033[33m"
+#define MAGENTA "\033[35m"
+#define GREEN   "\033[32m"
+
 
 using namespace std;
 using namespace combat_utils;
@@ -27,9 +33,9 @@ void Player::doAttack(Character *target) {
 
 void Player::takeDamage(int damage) {
     setHealth(health - damage);
-    cout << "---You have taken " << damage << " damage---" << endl;
+    cout << YELLOW << "---You have taken " << damage << " damage---" << RESET << endl;
     if (health <= 0) {
-        cout << "---You died---" << endl;
+        cout << RED << "\t---You died---" << RESET << endl;
     }
 }
 
@@ -50,7 +56,7 @@ void Player::flee(vector<Enemy *> enemies) {
 }
 
 void Player::emote() {
-    cout << "---He's doing Mewign---" << endl;
+    cout << MAGENTA << "\t---He's doing Mewign---" << RESET << endl;
 }
 
 void Player::levelUp() {
@@ -70,7 +76,7 @@ void Player::gainExperience(int exp) {
 }
 
 Character *Player::getTarget(vector<Enemy *> enemies) {
-    cout << "Choose who to attack " << endl;
+    cout <<GREEN<<"\t---Choose who to attack---" <<RESET<<endl;
     int targetIndex = 0;
     for (int i = 0; i < enemies.size(); i++) {
         cout << i << ". " << enemies[i]->getName() << endl;
@@ -82,9 +88,9 @@ Character *Player::getTarget(vector<Enemy *> enemies) {
 
 Action Player::takeAction(vector<Enemy *> enemies) {
     int option = 0;
-    cout << "Choose an action" << endl;
-    cout << "1. Attack" << endl;
-    cout << "2. Escape rope" << endl;
+    cout <<GREEN <<"\t ---Choose an action---" <<RESET<< endl;
+    cout <<RED<< "1. Attack" <<RED<< endl;
+    cout <<GREEN<< "2. Escape rope" <<RESET<< endl;
     cin >> option;
     Character *target = nullptr;
 
@@ -111,7 +117,7 @@ Action Player::takeAction(vector<Enemy *> enemies) {
             };
             break;
         default:
-            cout << "Invalid option (read numb)" << endl;
+            cout <<RED<<"\t ---Invalid option (read numb)---" <<RESET<< endl;
             break;
     }
 
